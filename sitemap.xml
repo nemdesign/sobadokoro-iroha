@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset 
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://nemdesign.github.io/sobadokoro-iroha/</loc>
+    <lastmod>2025-04-30</lastmod>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://nemdesign.github.io/sobadokoro-iroha/#gallery</loc>
+    <lastmod>2025-04-30</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://nemdesign.github.io/sobadokoro-iroha/#main-content</loc>
+    <lastmod>2025-04-30</lastmod>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>
