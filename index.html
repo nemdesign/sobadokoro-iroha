@@ -14,54 +14,49 @@
     <span class="main">いろは</span>
   </div>
 
-  <div class="scroll-wrapper fade" style="display: block;">
+  <div class="scroll-wrapper fade" style="display: none;">
 
-    <div class="panel panel-fullscreen" id="panel-1">
+    <!-- <div class="panel panel-fullscreen" id="panel-1">
       <img src="images/noren1.JPG" alt="メインイメージ" />
       <div class="text-overlay main-text">蕎麦処いろは</div>
-    </div>
+    </div> -->
+
+    <section class="hero-bg">
+      <video autoplay muted loop playsinline>
+        <source src="images/mainvisualmovie.mp4" type="video/mp4">
+        お使いのブラウザは動画に対応していません。
+      </video>
+      <div class="hero-text">
+        <span class="sub">蕎麦処<span>
+        <span class="main">いろは</span>
+    </section>
+        
+    <section class="gallery-section fade-in">
+      <h2>いろはの風景</h2>
+      <div class="gallery-grid">
+        <img src="images/mise2.JPG" alt="いろは店前画像1" class="gallery-item" />
+        <img src="images/noren2.png" alt="のれん画像" class="gallery-item" />
+        <img src="images/men1.png" alt="そばめん画像" class="gallery-item" />
+        <img src="images/yudegama1.png" alt="ゆでがま画像" class="gallery-item" />
+        <img src="images/kakiage1.png" alt="かきあげ画像" class="gallery-item" />
+        <img src="images/soba2.png" alt="ゆでがまそば画像" class="gallery-item" />  
+        <img src="images/soba4.JPG" alt="温そば画像" class="gallery-item" />
+        <img src="images/soba1.png" alt="中山道佐久煮こじそば画像" class="gallery-item" />
+        <img src="images/food2.jpeg" alt="もり蕎麦セット画像" class="gallery-item" />
+        <img src="images/food1.jpeg" alt="蕎麦セット画像" class="gallery-item" />
+        <img src="images/food3.jpeg" alt="卵焼き画像" class="gallery-item" />
+        <img src="images/food4.jpeg" alt="ネギ天画像" class="gallery-item" />
+        <img src="images/food5.jpeg" alt="コーヒー画像" class="gallery-item" />
+        <img src="images/sake1.png" alt="酒画像" class="gallery-item" />
+        <!-- 追加画像 -->
+      </div>
+    </section>
     
-
-    <!-- Panel 2 -->
-    <div class="panel fade-in sub-panel">
-      <img src="images/display1.png" alt="イメージ2" />
-      <div class="text-overlay">
-        <p class="text-line">春には一面に咲き誇る菜の花。</p>
-        <p class="text-line">その中でいただく手打ち蕎麦は、</p>
-        <p class="text-line">まるで自然と一体になるような時間。</p>
-      </div>
-    </div>
-
-    <!-- Panel 3 -->
-    <div class="panel fade-in sub-panel">
-      <img src="images/yudegama1.png" alt="イメージ3" />
-      <div class="text-overlay">
-        <p class="text-line">地元の山々から湧き出る清らかな水を使用。</p>
-        <p class="text-line">一滴一滴が蕎麦の旨味を引き出し、</p>
-        <p class="text-line">喉越しを際立たせます。</p>
-      </div>
-    </div>
-
-    <!-- Panel 4 -->
-    <div class="panel fade-in sub-panel">
-      <img src="images/men1.png" alt="イメージ4" />
-      <div class="text-overlay">
-        <p class="text-line">毎朝打たれる蕎麦は、</p>
-        <p class="text-line">手作業ならではのコシと風味。</p>
-        <p class="text-line">一口ごとに、技と魂を感じてください。</p>
-      </div>
-    </div>
-
-    <!-- Panel 5 -->
-    <div class="panel fade-in sub-panel">
-      <img src="images/soba1.png" alt="イメージ5" />
-      <div class="text-overlay">
-        <p class="text-line">五感で感じる、本物の蕎麦体験。</p>
-        <p class="text-line">静かに流れる時間と共に、</p>
-        <p class="text-line">ゆったりとお楽しみください。</p>
-      </div>
-    </div>
-  </div>
+    <!-- モーダル -->
+    <div id="modal" class="modal">
+      <span class="close">&times;</span>
+      <img class="modal-content" id="modal-img" />
+    </div>        
 
   <div id="main-content" class="fade" style="display: none;">
     <section class="fade-in">
