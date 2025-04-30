@@ -6,8 +6,8 @@
 html, body {
   margin: 0;
   padding: 0;
-  width: 100vw;
-  min-height: 100vh;
+  width: 100%;
+  height: 100%;
   font-family: 'Noto Serif JP', serif;
   background: #f9f6f1 url('images/washi.png') no-repeat center center;
   background-size: cover;
@@ -50,7 +50,14 @@ html, body {
   100% { opacity: 1; filter: blur(0); }
 }
 
-/* フェード */
+/* スクロール用ラッパー */
+.scroll-wrapper {
+  width: 100%;
+  overflow-x: hidden;
+  background-color: transparent;
+}
+
+/* フェード用クラス */
 .fade {
   opacity: 0;
   transition: opacity 0.8s ease;
@@ -64,7 +71,6 @@ html, body {
   opacity: 0;
   transform: translateY(40px) scale(0.98);
   transition: opacity 1.4s ease-out, transform 1.4s cubic-bezier(0.19, 1, 0.22, 1);
-  will-change: opacity, transform;
 }
 
 .fade-in.visible {
@@ -73,91 +79,69 @@ html, body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
-/* パネル共通 */
-.panel {
-  /* max-width: 960px; */
-  margin: 0 auto 100px;
+.gallery-section {
+  background-color: #f9f6f1;
   padding: 60px 20px;
-  background-color: #e5dfd5;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.sub-panel {
-  max-width:960px;
-  margin: 50px auto;
-  padding: 0 20px;
-}
-
-.panel img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 20px;
-}
-
-.scroll-wrapper {
-  width: 100vw;
-  min-height: 100vh;
-  overflow-x: hidden;
-  background-color: transparent;
-  position: relative;
-  margin: 0;
-  padding: 0;
-}
-
-/* Panel 1 フルスクリーン設定 */
-.panel#panel-1 {
-  width: 100vw;
-  height: 100vh;
-  position: relative;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-  background: black;
-}
-
-.panel#panel-1 img {
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  object-position: center center;
-  display: block;
-  margin: 0;
-  padding: 0;
-  border: none;
-}
-
-@keyframes zoomSlow {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.05); }
-}
-
-#panel-1 .text-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  font-size: 2.4rem;
-  background: rgba(0, 0, 0, 0.4);
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  opacity: 0;
-  animation: fadeInText 2s ease-out forwards;
   text-align: center;
+}
+
+.gallery-section h2 {
+  font-size: 2rem;
+  font-family: 'Kouzan', serif;
+  margin-bottom: 30px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.gallery-item {
+  width: 100%;
+  cursor: pointer;
+  transition: transform 0.3s;
+  border-radius: 8px;
+}
+
+.gallery-item:hover {
+  transform: scale(1.02);
+}
+
+/* モーダル表示 */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.85);
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
   max-width: 90%;
+  max-height: 80vh;
 }
 
-@keyframes fadeInText {
-  0% { opacity: 0; transform: scale(1.1); filter: blur(6px); }
-  100% { opacity: 1; transform: scale(1); filter: blur(0); }
+.close {
+  position: absolute;
+  top: 30px;
+  right: 50px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-/* メインセクション */
+/* メインコンテンツ背景 */
 #main-content {
   background: #f9f6f1 url('images/washi2.png') no-repeat center center;
   background-size: cover;
@@ -165,58 +149,189 @@ html, body {
   padding: 40px 20px;
 }
 
-/* レスポンシブ：タブレット */
-@media (max-width: 1024px) {
-  .start-anime {
-    transform: translate(-50%, -50%) scale(0.8);
-  }
-  .start-anime .main { font-size: 4rem; }
-  .start-anime .sub { font-size: 1.8rem; }
+.hero-bg {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
 
-  .panel {
-    padding: 40px 20px;
+.hero-bg video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  color: white;
+  font-size: 3rem;
+  text-align: center;
+  font-family: 'Kouzan', serif;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6); /* ←見やすくするため */
+}
+
+.hero-text .sub,
+.hero-text .main {
+  color: white;
+  letter-spacing: -0.1em;
+  display: block;
+}
+
+.hero-text .sub {
+  font-size: 2.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero-text .main {
+  font-size: 6rem;
+}
+
+.gallery-section {
+  background: #f6f2ea url('images/wagami-pattern.png') repeat;
+  background-size: 400px auto;
+  padding: 80px 20px;
+  text-align: center;
+  color: #2e2e2e;
+}
+
+.gallery-section h2 {
+  font-family: 'Kouzan', serif;
+  font-size: 2.4rem;
+  margin-bottom: 40px;
+  color: #a67c52; /* 焦げ茶×金の中間色 */
+  letter-spacing: 0.1em;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.gallery-item {
+  width: 100%;
+  height: 220px; /* ここで高さを固定 */
+  object-fit: cover; /* 中央をトリミングして揃える */
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (max-width: 1024px) {
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
   }
 
-  #panel-1 img {
-    object-position: 65% center;
+  .gallery-item {
+    height: 180px;
   }
 
-  #panel-1 .text-overlay {
-    font-size: 1.8rem;
-    padding: 1rem 1.6rem;
+  .gallery-section h2 {
+    font-size: 2rem;
   }
 }
 
-/* レスポンシブ：スマホ */
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
+  /* ギャラリー */
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+  }
+
+  .gallery-item {
+    height: 160px;
+  }
+
+  .gallery-section h2 {
+    font-size: 1.6rem;
+  }
+
+  /* モーダル */
+  .modal-content {
+    max-width: 95%;
+    max-height: 75vh;
+  }
+
+  .close {
+    top: 20px;
+    right: 30px;
+    font-size: 30px;
+  }
+
+  /* ヒーローテキスト（トップ動画） */
+  .hero-text {
+    font-size: 2rem;
+  }
+
+  .hero-text .sub {
+    font-size: 1.4rem;
+  }
+
+  .hero-text .main {
+    font-size: 3.2rem;
+  }
+
+  /* 筆文字アニメーション */
   .start-anime {
     transform: translate(-50%, -50%) scale(0.65);
   }
-  .start-anime .main { font-size: 5.2rem; }
-  .start-anime .sub { font-size: 2rem; }
 
-  .panel {
+  .start-anime .main {
+    font-size: 4rem;
+  }
+
+  .start-anime .sub {
+    font-size: 1.6rem;
+  }
+
+  /* メインコンテンツ */
+  #main-content {
     padding: 20px 10px;
   }
 
-  .panel#panel-1 {
-    height: 100vh;
-    padding: 0;
+  #main-content h1 {
+    font-size: 1.6rem;
   }
 
-  .panel#panel-1 img {
-    object-position: 90% center;
+  #main-content p,
+  #main-content li {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .gallery-item {
+    height: 140px;
   }
 
-  #panel-1 .text-overlay {
+  .gallery-section h2 {
     font-size: 1.4rem;
-    padding: 0.6rem 1rem;
-    top: 55%;
   }
 
-  .sub-panel {
-    max-width: 90%;
-    margin: 30px auto;
-    padding: 0 10px;
+  .hero-text {
+    font-size: 1.6rem;
+  }
+
+  .hero-text .sub {
+    font-size: 1.2rem;
+  }
+
+  .hero-text .main {
+    font-size: 2.4rem;
   }
 }
